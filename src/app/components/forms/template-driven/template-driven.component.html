@@ -1,7 +1,7 @@
 <h2>Template Driven</h2>
 
-<form>
-  <label>
+<form #form="ngForm" (ngSubmit)="submitForm(form)">
+  <!-- <label>
     Nome:
     <input type="text" name="inputName" #name="ngModel" [ngModel]="name.value" required>
   </label>
@@ -15,4 +15,24 @@
     </ul>
   </div>
 
+  <label>
+    Feminino
+    <input type="radio" name="radio" id="" value="Feminino">
+    Masculino
+    <input type="radio" name="radio" id="" value="Masculino">
+  </label> -->
+
+  <select name="Comidas" id="" #Comidas="ngModel" ngModel required>
+    <option value="">Selecione um Alimento</option>
+    <option value="Batata">Batata</option>
+    <option value="Frango">Frango</option>
+    <option value="Carne">Carne</option>
+  </select>
+
+  <p>Comida Selecionada: {{Comidas.value}}</p>
+
+  <p>Forms dados : {{form.value | json}}</p>
+  <p>{{form.valid}}</p>
+
+  <input type="submit" value="Enviar Forms" [disabled]="!form.valid" (submit)="submitForm">
 </form>
