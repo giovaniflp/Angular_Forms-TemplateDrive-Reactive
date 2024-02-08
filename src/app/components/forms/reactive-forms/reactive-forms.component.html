@@ -1,1 +1,45 @@
-<p>reactive-forms works!</p>
+<h2>Reactive Forms</h2>
+
+<form [formGroup]="profileForm" (ngSubmit)="submit()">
+  <label>
+    Nome:
+    <input type="text" name="" id="" formControlName="name" required>
+  </label>
+
+  <p>{{profileForm.value.name}}</p>
+
+  <div formGroupName="mystacks">
+    <label>
+      Front:
+      <input type="text" formControlName="front">
+      <p>Value: {{profileForm.value.mystacks?.front}}</p>
+    </label>
+
+    <label>
+      Back:
+      <input type="text" formControlName="back">
+      <p>Value: {{profileForm.value.mystacks?.back}}</p>
+    </label>
+  </div>
+
+  <button type="button" (click)="update()">Update Forms</button>
+
+  <hr>
+
+  <label>
+    New Food
+    <input #newFood type="text" name="" id="">
+  </label>
+
+  <div formArrayName="myFavoriteFoods">
+    @for (item of profileForm.value.myFavoriteFoods; track $index) {
+      <label>
+        {{item}}
+        <input type="text" name="" id="" formControlName="food">
+      </label>
+    }
+  </div>
+  <button type="button" (click)="addFavoriteFood(newFood.value)"> ADD </button>
+
+  <button [disabled]="!profileForm.valid">Submit</button>
+</form>
